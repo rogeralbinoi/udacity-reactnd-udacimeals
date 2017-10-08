@@ -4,14 +4,20 @@ import './index.css'
 import App from './components/App'
 import calendar from './reducers'
 import { createStore } from 'redux'
+import { Provider } from 'react-redux'
 
 import registerServiceWorker from './registerServiceWorker'
 
-const store = createStore(calendar)
+const store = createStore(
+  calendar,
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
 
 console.log(store.getState())
 
 
 
-ReactDOM.render(<App />, document.getElementById('root'))
+ReactDOM.render(
+  <Provider store={store}>
+    <App />
+  </Provider>, document.getElementById('root'))
 registerServiceWorker()
